@@ -1,0 +1,15 @@
+{
+    "meta": {
+        "last_updated": "2023-11-25T12:00:00Z",
+        "generated_by": "n8n"
+    },
+    "pins": [
+        {
+            "title": "Bridal Script Font",
+            "filename": "wedding-font-1.jpg",
+            "category": "wedding",
+            "date": "2023-11-25T14:30:00Z",
+            "ai_prompt": "elegant wedding script font with floral elements"
+        }
+    ]
+}
