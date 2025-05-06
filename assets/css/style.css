@@ -1,0 +1,185 @@
+/* Base Variables */
+:root {
+    --primary: #2D2D2D;
+    --accent: #D4A373;
+    --bg: #FAF9F5;
+    --border: #E0E0E0;
+    --shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--bg);
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Main Heading */
+h1 {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    font-size: 3rem;
+    color: var(--primary);
+    margin: 40px 0 30px;
+    letter-spacing: -0.5px;
+}
+
+/* Grid Layout */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 15px 0;
+}
+
+/* Pin Cards */
+.pin-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.pin-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+}
+
+.pin-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1024/1536;
+    object-fit: cover;
+    border-bottom: 1px solid var(--border);
+}
+
+/* Card Content */
+.pin-info {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.pin-title {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 1.1rem;
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* Download Button */
+.download-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: opacity 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.download-btn:hover {
+    opacity: 0.9;
+}
+
+/* Filters */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 30px 0 50px;
+    padding: 0 20px;
+}
+
+.filter-btn {
+    background: none;
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    color: var(--primary);
+}
+
+.filter-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.2rem;
+        margin: 30px 0;
+    }
+    
+    .pin-info {
+        padding: 15px;
+    }
+    
+    .download-btn {
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .filters {
+        gap: 8px;
+    }
+    
+    .filter-btn {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .filters, .download-btn {
+        display: none !important;
+    }
+    
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
