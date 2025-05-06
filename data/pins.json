@@ -1,15 +1,18 @@
 {
-    "meta": {
-        "last_updated": "2023-11-25T12:00:00Z",
-        "generated_by": "n8n"
-    },
     "pins": [
         {
             "title": "Bridal Script Font",
-            "filename": "wedding-font-1.jpg",
+            "filename": "wedding-1.jpg",
             "category": "wedding",
             "date": "2023-11-25T14:30:00Z",
-            "ai_prompt": "elegant wedding script font with floral elements"
+            "ai_prompt": "vintage wedding script with floral elements"
+        },
+        {
+            "title": "Modern Sans Serif",
+            "filename": "logo-1.jpg",
+            "category": "logo",
+            "date": "2023-11-25T15:00:00Z",
+            "ai_prompt": "clean modern sans-serif font"
         }
     ]
 }
