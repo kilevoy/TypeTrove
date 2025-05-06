@@ -3,17 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Font Pins Collection</title>
+    <title>Design Font Pins Collection</title>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        :root {
+            --primary: #2D2D2D;
+            --accent: #D4A373;
+            --bg: #FAF9F5;
+            --border: #E0E0E0;
+            --shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background: var(--bg);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .pin-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            break-inside: avoid;
+        }
+
+        .pin-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pin-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px 12px 0 0;
+            aspect-ratio: 1024/1536;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            font-size: 3rem;
+            color: var(--primary);
+            margin: 40px 0 30px;
+        }
+
+        .pin-info {
+            padding: 18px;
+        }
+
+        .pin-title {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 0 0 15px 0;
+            font-size: 1.1rem;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .download-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 0.95rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 30px 0 50px;
+            padding: 0 20px;
+        }
+
+        .filter-btn {
+            background: none;
+            border: 1px solid #E0E0E0;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>AI Generated Font Pins</h1>
+    <h1>Design Font Pins Collection</h1>
     
-    <div class="filters" id="filtersContainer"></div>
+    <div class="filters">
+        <button class="filter-btn active" data-category="all">All</button>
+        <button class="filter-btn" data-category="wedding">Wedding & Event</button>
+        <button class="filter-btn" data-category="logo">Logo & Branding</button>
+        <button class="filter-btn" data-category="cricut">Cricut & Crafting</button>
+        <button class="filter-btn" data-category="holiday">Holiday & Seasonal</button>
+        <button class="filter-btn" data-category="retro">Retro & Vintage</button>
+        <button class="filter-btn" data-category="modern">Modern & Minimalist</button>
+        <button class="filter-btn" data-category="calligraphy">Elegant Calligraphy</button>
+    </div>
 
     <div class="grid" id="pinGrid"></div>
 
-    <script src="assets/js/script.js"></script>
+    <script>
+        // Demo Data with 8 AI-generated pins
+        const pins = [
+            {
+                title: "Bridal Script Font",
+                image: "https://placehold.co/400x600/F5E6E3/704F4F?text=Wedding+Font\nElegant+Script",
+                category: "wedding",
+                date: "2023-11-25T14:30:00"
+            },
+            {
+                title: "Modern Sans Serif",
+                image: "https://placehold.co/400x600/E8F0FE/1A5FB4?text=Logo+Font\nClean+Lines",
+                category: "logo",
+                date: "2023-11-25T15:00:00"
+            },
+            {
+                title: "Crafting Bold Font",
+                image: "https://placehold.co/400x600/DAF0E6/2A593F?text=Craft+Font\nCut+Ready",
+                category: "cricut",
+                date: "2023-11-25T15:30:00"
+            },
+            {
+                title: "Christmas Typeface",
+                image: "https://placehold.co/400x600/FFE8E8/C62828?text=Holiday+Font\nMerry+Xmas",
+                category: "holiday",
+                date: "2023-11-25T16:00:00"
+            },
+            {
+                title: "70s Disco Font",
+                image: "https://placehold.co/400x600/FEE9D1/FF6B00?text=Retro+Font\nDisco+Style",
+                category: "retro",
+                date: "2023-11-25T16:30:00"
+            },
+            {
+                title: "Minimalist Sans",
+                image: "https://placehold.co/400x600/F3F3F3/555555?text=Modern+Font\nClean+Style",
+                category: "modern",
+                date: "2023-11-25T17:00:00"
+            },
+            {
+                title: "Luxury Calligraphy",
+                image: "https://placehold.co/400x600/2D2D2D/F5E6E3?text=Calligraphy\nFormal+Style",
+                category: "calligraphy",
+                date: "2023-11-25T18:00:00"
+            },
+            {
+                title: "Vintage Serif Font",
+                image: "https://placehold.co/400x600/FFF3E0/E8AA42?text=Retro+Font\nClassic+Style",
+                category: "retro",
+                date: "2023-11-25T19:00:00"
+            }
+        ];
+
+        function renderPins() {
+            const grid = document.getElementById('pinGrid');
+            const sortedPins = [...pins].sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            grid.innerHTML = sortedPins.map(pin => `
+                <div class="pin-card" data-category="${pin.category}">
+                    <img src="${pin.image}" class="pin-image" alt="${pin.title}">
+                    <div class="pin-info">
+                        <h3 class="pin-title">${pin.title}</h3>
+                        <button class="download-btn">Download Free</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Get selected category
+                const category = this.dataset.category;
+                
+                // Filter pins
+                document.querySelectorAll('.pin-card').forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Initial render
+        window.addEventListener('load', renderPins);
+    </script>
 </body>
 </html>
